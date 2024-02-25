@@ -1,0 +1,343 @@
+body {
+	background: #222;
+}
+#arena {
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	height: auto;
+	width: calc(100% - 2px);
+	max-width: 500px;
+	margin-top: 3em;
+}
+button {
+	cursor: pointer;
+	font-family: "Roboto", sans-serif;
+}
+.container {
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%);
+	width: 100vw;
+	max-width: 500px;
+}
+#log {
+	height: 80px;
+	width: 100%;
+	/* 	max-width: 500px; */
+	background: #ccc;
+	border-radius: 10px;
+	font-family: monospace;
+	overflow-y: auto;
+	border: 2px dashed #666;
+	width: calc(100% - 6px);
+}
+
+#log > span {
+	display: block;
+	padding: 5px;
+	border: 1px solid #111;
+	border-radius: 10px;
+	box-sizing: border-box;
+	color: #333;
+}
+.shield,
+.bandolier {
+	transition: stroke-dasharray 200ms;
+}
+.bot,
+.shield,
+.scan,
+.bandolier {
+	transition: 100ms;
+}
+.startBtn:hover,
+.endBtn:hover {
+	opacity: 0.7;
+}
+.startBtn,
+.endBtn {
+	border-radius: 5px;
+	display: inline-block;
+	background: none;
+	padding: 5px;
+	width: 100px;
+	font-weight: bold;
+	font-size: 1.8em;
+	color: #f5f5f5;
+	font-family: monospace;
+}
+.startBtn {
+	float: right;
+	border: 2px solid forestgreen;
+}
+.endBtn {
+	float: left;
+	border: 2px solid firebrick;
+}
+.matchupContainer {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	margin-bottom: 5px;
+}
+.versus {
+	color: #f5f5f5;
+	font-family: monospace;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%);
+	padding-top: 6px;
+}
+.s1 {
+	float: left;
+}
+.s2 {
+	float: right;
+}
+.selectedFighter {
+	cursor: pointer;
+	position: relative;
+	border: 1px solid #111;
+	border-radius: 10px;
+	width: 200px;
+	max-width: 45%;
+	padding: 4px;
+	font-weight: bold;
+	background: goldenrod;
+	color: #fff;
+	/* 	font-family: "Roboto", sans-serif; */
+	font-family: monospace;
+	font-size: 1.3em;
+	text-shadow: 0.5px 0px 2px #000;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+.selectedFighter > option {
+	cursor: pointer;
+	text-shadow: 0.5px 0px 2px #000;
+}
+option {
+	text-align: center;
+	text-shadow: 0.5px 0px 2px #000;
+	cursor: pointer;
+}
+.templateLoader {
+	background-color: rgba(155, 155, 155, 0.8);
+	padding: 5px;
+	font-size: 80%;
+	width: 172px;
+	position: relative;
+	left: 50%;
+	border-radius: 0 0 5px 5px;
+	transform: translate(-50%);
+}
+/* menu stuff */
+.menuArea {
+	position: fixed;
+	top: 0%;
+	right: 0%;
+	z-index: 999;
+	height: 100%;
+	width: 200px;
+	border-left: 3px solid rgb(50, 50, 50);
+	border-right: 3px solid rgb(50, 50, 50);
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	background: rgba(60, 60, 60, 0.8);
+	opacity: 1;
+	transition: 200ms;
+	overflow-y: auto;
+	overflow-x: hidden;
+	box-shadow: -3px 0px 5px rgba(25, 25, 25, 0.5);
+	color: #fff;
+	font-family: "Roboto", sans-serif;
+}
+.btnContainer {
+	margin-top: 70px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+.btnContainer > button {
+	flex: 1;
+	width: 100%;
+	height: 48px;
+	cursor: pointer;
+	background: rgb(100, 100, 100);
+	color: #fff;
+	font-size: 1.05em;
+	font-family: monospace;
+}
+
+.btnContainer > button:hover {
+	opacity: 0.8;
+}
+
+.leftPlayerBtn {
+	height: 3em;
+	width: 3em;
+	position: fixed;
+	left: 10px;
+	top: 10px;
+	background: rgba(0, 0, 0, 0.8);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' stroke='%23fff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round' class='css-i6dzq1'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3Ccircle cx='12' cy='7' r='4'%3E%3C/circle%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	border: 2px solid rgb(150, 150, 150);
+	border-radius: 50%;
+	z-index: 9999;
+	box-shadow: 2px 0px 3px #000;
+	cursor: pointer;
+	transition: 100ms;
+}
+.rightPlayerBtn {
+	height: 3em;
+	width: 3em;
+	position: fixed;
+	right: 10px;
+	top: 10px;
+	background: #000;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='24px' height='24px'%3E%3Cpath d='M 35 38 L 28 43 L 24 38 L 16 42 L 8 39 L 6 31 L 13 31 L 18 24 L 5 24 L 11 16 L 14 20 L 18 11 L 32 5 L 20 18 L 31 12 L 38 5 L 50 5 L 39 12 L 35 22 L 30 18 L 23 23 L 17 35 L 26 32 L 26 28 L 30 24 L 31 34 L 38 31 L 35 27 L 42 23 L 43 33 L 48 31 L 44 17 L 47 13 L 51 25 L 58 20 L 50 10 L 59 9 L 59 15 L 63 12 L 63 18 L 69 17 L 74 26 L 67 21 L 58 25 L 53 34 L 42 38 L 42 42 L 27 48 L 32 51 L 39 48 L 48 46 L 51 41 L 56 42 L 56 37 L 62 35 L 61 29 L 68 29 L 73 32 L 72 39 L 74 45 L 72 55 L 67 52 L 68 46 L 67 36 L 63 40 L 57 47 L 48 53 L 39 53 L 35 57 L 44 59 L 56 54 L 62 48 L 63 56 L 67 57 L 61 60 L 54 59 L 51 64 L 56 64 L 53 69 L 58 71 L 55 76' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: center;
+	border: 2px solid rgb(150, 150, 150);
+	border-radius: 50%;
+	z-index: 9999;
+	box-shadow: 2px 0px 3px #000;
+	cursor: pointer;
+	transition: 100ms;
+}
+.rightPlayerBtn:hover,
+.infoBtn:hover {
+	opacity: 0.8;
+}
+.rightPlayerBtn:active,
+.infoBtn:active {
+	box-shadow: 1px 0px 1px #000;
+}
+.closed {
+	height: 0%;
+	overflow: hidden;
+}
+
+.closed > * {
+	display: none;
+}
+.customBrain {
+	max-width: 180px;
+	min-width: 180px;
+	width: 180px;
+	min-height: 200px;
+}
+
+/* modal stuff */
+dialog {
+	z-index: 1000;
+	background: #ccc;
+	box-shadow: 0px 3px 8px #000;
+	border-radius: 8px;
+	border: none;
+	padding-top: 35px;
+	position: relative;
+	font-family: "Roboto", sans-serif;
+	min-width: 350px;
+	max-width: 500px;
+	width: 80%;
+	min-height: 500px;
+	max-height: 700px;
+	height: 80%;
+	overflow: hidden;
+}
+.gameInfo {
+	max-height: 100%;
+	width: 100%;
+	overflow-y: auto;
+}
+.gameInfo > h3 {
+	text-align: center;
+}
+.closeDialog {
+	position: absolute;
+	font-size: 2em;
+	/* 	font-weight: 900; */
+	top: 0px;
+	right: 0px;
+	border: none;
+	background: none;
+	cursor: pointer;
+	height: 30px;
+	width: 30px;
+	color: #fff;
+	font-family: monospace;
+}
+.closeDialog:hover {
+	color: rgba(0, 0, 0, 0.5);
+}
+.header {
+	text-align: center;
+	margin-top: -30px;
+}
+#open {
+	margin-top: 12px;
+	width: 100px;
+	border: 2px solid rgba(0, 255, 255, 0.5);
+	background: none;
+	color: #0ff;
+	padding: 10px;
+	font-family: "Roboto", sans-serif;
+	border-radius: 20px;
+	cursor: pointer;
+	position: absolute;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 3px grey;
+	border-radius: 10px;
+}
+
+/* Handle */
+.menuArea::-webkit-scrollbar-thumb {
+	background: #666;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+.menuArea::-webkit-scrollbar-thumb:hover {
+	background: #888;
+}
+/* Handle */
+.gameInfo::-webkit-scrollbar-thumb {
+	background: #666;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+.gameInfo::-webkit-scrollbar-thumb:hover {
+	background: #888;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #666;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #888;
+}
+.playerLink {
+	word-wrap: break-word;
+}
+.newPlayer {
+	border: 2px dotted #fff;
+	border-radius: 5px;
+	padding: 5px;
+}
