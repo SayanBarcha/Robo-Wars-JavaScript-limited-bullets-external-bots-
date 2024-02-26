@@ -326,7 +326,7 @@ dialog {
 /* Handle */
 ::-webkit-scrollbar-thumb {
 	background: #666;
-	border-radius: 10px;
+	border-radius: 11px;
 }
 
 /* Handle on hover */
